@@ -1,5 +1,5 @@
 /**
-* Comment
+* Comment.
 */
 class BankAccount {
     String accountNumber
