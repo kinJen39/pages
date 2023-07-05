@@ -1,0 +1,50 @@
+plugins {
+    id 'groovy'
+    id 'codenarc'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    main {
+        groovy {
+            srcDir 'src'
+        }
+    }
+    test {
+        groovy {
+            srcDir 'test'
+        }
+    }
+}
+
+dependencies {
+    //implementation 'org.yaml:snakeyaml:1.19'
+    implementation 'org.codehaus.groovy:groovy-all:2.4.16'
+    //implementation 'org.jenkins-ci.main:jenkins-core:2.168@jar'
+    //implementation 'org.jenkins-ci.plugins.workflow:workflow-step-api:2.19@jar'
+    //implementation 'org.kohsuke.stapler:stapler:1.256'
+    implementation 'org.apache.logging.log4j:log4j-core:2.16.0'
+    testImplementation 'junit:junit:4.12'
+}
+
+codenarc {
+    //ignoreFailures = true
+    //reportFormat = 'console'
+    toolVersion = '2.0.0'
+    configFile = file('config/codenarc.groovy')
+    sourceSets = sourceSets.main.groovy.srcDirs
+}
+
+project.gradle.startParameter.excludedTaskNames.add('check')
+
+//task extractCodenarcReport(type: Copy) {
+//    dependsOn codenarcMain
+//    from "$buildDir/reports/codenarc"
+//    include '*.html'
+//    into "$buildDir/codenarc-report"
+//}
+
+//build.finalizedBy(extractCodenarcReport)
